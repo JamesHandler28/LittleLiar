@@ -65,16 +65,16 @@ roleGuideBtn.addEventListener('click', () => {
     const isVisible = roleGuideOverlay.style.display === 'flex';
     if (isVisible) {
         roleGuideOverlay.style.display = 'none';
-        roleGuideBtn.textContent = 'Show Roles';
+        roleGuideBtn.textContent = 'How to Play';
     } else {
         roleGuideOverlay.style.display = 'flex';
-        roleGuideBtn.textContent = 'Hide Roles';
+        roleGuideBtn.textContent = 'Hide Rules';
     }
 });
 
 closeRoleGuideBtn.addEventListener('click', () => {
     roleGuideOverlay.style.display = 'none';
-    roleGuideBtn.textContent = 'Show Roles';
+    roleGuideBtn.textContent = 'How to Play';
 });
 
 socket.on('joinSuccess', (data) => {
@@ -97,6 +97,7 @@ socket.on('joinError', (message) => alert(message));
 socket.on('gameStartedPlayer', () => {
     playerWaitView.style.display = 'none';
     playerGameView.style.display = 'block';
+    roleGuideBtn.textContent = 'How to Play'; // Change text
     roleGuideBtn.style.display = 'inline-block';
 });
 socket.on('yourRole', (data) => {
