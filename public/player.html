@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>littleliar - Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="role-guide-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content role-guide-content">
+            <h3>Secret Roles</h3>
+            <p><strong>Friends:</strong> Your goal is to keep Mr. Coral alive by successfully disarming the Traps that have been laid for him.</p>
+            <p><strong>Conspiracy Ringleader:</strong> Your goal is to lure Mr. Coral to the Plot Location, but only after he has taken at least one damage and you have been chosen as the Bodyguard when the team visits that Location.</p>
+            <p><strong>Conspiracy Accomplices:</strong> Your goal is to help the Ringleader enact the Plot by convincing other players to trust the Ringleader, sabotaging attempts to disarm Traps, and keeping your identity hidden.</p>
+            <button id="close-role-guide-btn">Close</button>
+        </div>
+    </div>
+
+    <div id="pause-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content">
+            <h2 id="pause-message">Game Paused</h2>
+            <p>Waiting for players to reconnect...</p>
+        </div>
+    </div>
+
+    <div id="game-over-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content">
+            <h2 id="win-title"></h2>
+            <p id="win-reason"></p>
+            <div id="reveal-container">
+                <h4>The Secrets Are Revealed!</h4>
+                <p><strong>The Plot:</strong> <span id="plot-reveal"></span></p>
+                <ul id="player-roles-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="final-accusation-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content">
+            <h2>Final Accusation</h2>
+            <h3 id="accusation-timer">5:00</h3>
+            <p>Discuss with your team and cast your vote for each category.</p>
+            <div id="final-vote-container">
+                <div class="vote-category">
+                    <h4>Suspect</h4>
+                    <div id="suspect-vote-list"></div>
+                </div>
+                <div class="vote-category">
+                    <h4>Weapon</h4>
+                    <div id="weapon-vote-list"></div>
+                </div>
+                <div class="vote-category">
+                    <h4>Location</h4>
+                    <div id="location-vote-list"></div>
+                </div>
+            </div>
+            <button id="submit-final-vote-btn">Submit Final Vote</button>
+        </div>
+    </div>
+
+    <div id="tie-breaker-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content">
+            <h2>Resolve the Tie!</h2>
+            <p>As the Scout, you must break the tie for the following categories.</p>
+            <div id="tie-breaker-container"></div>
+            <button id="submit-tie-breaker-btn">Submit Final Decision</button>
+        </div>
+    </div>
+
+    <div id="player-join-view" class="container">
+        <h3>Join a Game</h3>
+        <input type="text" id="player-name-input" placeholder="Enter Your Name">
+        <input type="text" id="room-code-input" placeholder="Enter Room Code" maxlength="6">
+        <button id="join-game-btn">Join</button>
+    </div>
+
+    <div id="player-wait-view" style="display: none;" class="container">
+        <h2>Welcome, <span id="player-name-display"></span>!</h2>
+        <p>Waiting for the host to start the game...</p>
+        <div id="character-selection-container">
+            <!-- Character options will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <div id="player-game-view" style="display: none;" class="container">
+        <button id="role-guide-btn" style="display: none;">Show Roles</button>
+        <div id="player-info">
+            <h3>Your Role: <span id="role-display">???</span></h3>
+            <h4>Character: <span id="character-display">???</span></h4>
+        </div>
+        <div id="conspiracy-plot-info" style="display: none;">
+            <h4>Secret Plot:</h4>
+            <p id="plot-details"></p>
+        </div>
+        <div id="conspiracy-team-info" style="display: none;">
+            <h4>Your Team:</h4>
+            <ul id="conspiracy-team-list"></ul>
+        </div>
+        <div id="player-hand"></div>
+        <div id="collected-clues" style="display: none;">
+            <h4>Clues You've Collected:</h4>
+            <ul id="clue-list"></ul>
+        </div>
+        <div id="action-area"></div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="player.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>littleliar - Host</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="pause-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content">
+            <h2 id="pause-message">Game Paused</h2>
+            <p>Waiting for players to reconnect...</p>
+        </div>
+    </div>
+
+    <div id="game-over-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content">
+            <h2 id="win-title"></h2>
+            <p id="win-reason"></p>
+            <div id="reveal-container">
+                <h4>The Secrets Are Revealed!</h4>
+                <p><strong>The Plot:</strong> <span id="plot-reveal"></span></p>
+                <ul id="player-roles-list"></ul>
+            </div>
+            <button id="play-again-btn-host">Play Again</button>
+        </div>
+    </div>
+
+    <div id="final-accusation-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content">
+            <h2>Final Accusation</h2>
+            <h3 id="accusation-timer">5:00</h3>
+            <p>The players are casting their final votes.</p>
+            <div id="final-vote-container">
+                <div class="vote-category">
+                    <h4>Suspect</h4>
+                    <div id="suspect-vote-list"></div>
+                </div>
+                <div class="vote-category">
+                    <h4>Weapon</h4>
+                    <div id="weapon-vote-list"></div>
+                </div>
+                <div class="vote-category">
+                    <h4>Location</h4>
+                    <div id="location-vote-list"></div>
+                </div>
+            </div>
+            <div id="host-vote-status">Waiting for players to vote...</div>
+        </div>
+    </div>
+
+    <div id="host-lobby-view" class="container">
+        <h1>Game Lobby</h1>
+        <p>Tell players to go to the site and join with this code:</p>
+        <h2 id="room-code-display">----</h2>
+        <h3>Players:</h3>
+        <ul id="player-list"></ul>
+        <button id="start-game-btn" style="display: none;">Start Game</button>
+    </div>
+
+    <!-- This view is now a direct child of body for better layout control -->
+    <div id="host-game-view" style="display: none;">
+        <!-- This new wrapper helps with alignment -->
+        <div class="game-content">
+            <div id="info-container">
+                <h3>Players:</h3>
+                <ul id="game-player-list"></ul>
+                <div id="clue-board">
+                    <div id="public-clue-card" class="clue-card" style="display: none;"></div>
+                    <div id="declarations-container" class="clue-card" style="display: none;">
+                        <h4>Bodyguard Declarations</h4>
+                        <ul id="declarations-list"></ul>
+                    </div>
+                </div>
+                <div id="proposal-display" style="display: none;"></div>
+                <div id="game-log-container">
+                    <h4>Game Log</h4>
+                    <ul id="game-log"></ul>
+                </div>
+            </div>
+            <div id="board-container">
+                <!-- Board squares and pawns will be drawn here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="host.js"></script>
+</body>
+</html>
+
