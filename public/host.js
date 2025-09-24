@@ -34,8 +34,18 @@ socket.on('lobbyUpdate', (data) => {
     playerList.innerHTML = '';
     data.players.forEach(player => {
         const li = document.createElement('li');
+        li.classList.add('player-list-item'); // Add a class for styling
+
+        let iconHtml = '';
+        if (player.character) {
+            iconHtml = `<img src="/assets/token_${player.character.color}.png" class="player-list-icon" alt="${player.character.name} icon">`;
+        } else {
+            // A placeholder for players who haven't selected a character
+            iconHtml = `<div class="player-list-icon-placeholder"></div>`;
+        }
+
         const characterText = player.character ? ` - Playing as ${player.character.name}` : ' - Selecting character...';
-        li.textContent = player.name + characterText;
+        li.innerHTML = `${iconHtml}<span>${player.name}${characterText}</span>`;
         playerList.appendChild(li);
     });
 
@@ -289,9 +299,18 @@ function updatePlayerList(players, scoutId) {
     gamePlayerList.innerHTML = '';
     players.forEach(player => {
         const li = document.createElement("li");
+        li.classList.add('player-list-item'); // Add class for styling
+
         const voteIndicator = player.hasVoted ? '<span class="voted-check">✓</span>' : "";
         const characterName = player.character ? `(${player.character.name})` : "";
-        li.innerHTML = `${player.name} ${characterName} ${voteIndicator}`;
+        
+        let iconHtml = '';
+        if (player.character) {
+            iconHtml = `<img src="/assets/token_${player.character.color}.png" class="player-list-icon" alt="${player.character.name} icon">`;
+        }
+
+        li.innerHTML = `${iconHtml}<span>${player.name} ${characterName} ${voteIndicator}</span>`;
+
         if (player.playerId === scoutId) {
             li.classList.add("scout-highlight");
         }

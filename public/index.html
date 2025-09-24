@@ -7,19 +7,166 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Simple animated background container -->
+    <div class="background-animation">
+        <ul class="squares">
+            <li></li> <li></li> <li></li> <li></li> <li></li>
+            <li></li> <li></li> <li></li> <li></li> <li></li>
+        </ul>
+    </div >
+
+    <!-- INTERACTIVE TUTORIAL MODAL -->
+    <div id="welcome-tutorial-overlay" class="overlay" style="display: none;">
+        <div class="overlay-content tutorial-content">
+            <div id="tutorial-container">
+
+                <!-- Step 1: The Teams -->
+                <div class="tutorial-step active" data-step="1">
+                    <h3>Welcome! Here’s the 60-second guide.</h3>
+                    <p>In this game, there are two secret teams:</p>
+                    <div class="tutorial-visual">
+                        <div class="team-card friends">
+                            <div class="team-title">FRIENDS</div>
+                            <div class="team-goal">Goal: Disarm all traps.</div>
+                        </div>
+                        <div class="team-card conspiracy">
+                            <div class="team-title">CONSPIRACY</div>
+                            <div class="team-goal">Goal: Sabotage missions.</div>
+                        </div>
+                    </div>
+                    <p>As a <span class="friends-text">Friend</span>, you won't know who to trust. The <span class="conspiracy-text">Conspiracy</span>, however, knows their secret partners.</p>
+                </div>
+
+                <!-- Step 2: The Scout & Vote -->
+                <div class="tutorial-step" data-step="2">
+                    <h3>Each round, a player is the SCOUT.</h3>
+                    <p>The Scout proposes a team, a location to visit, and a Bodyguard for the mission.</p>
+                    <div class="tutorial-visual players">
+                        <div class="tutorial-player scout">Scout</div>
+                        <div class="tutorial-player selected">Player A</div>
+                        <div class="tutorial-player">Player B</div>
+                        <div class="tutorial-player selected">Player C</div>
+                        <div class="tutorial-player">Player D</div>
+                    </div>
+                    <p>Everyone then votes <span class="vote-yes">YES</span> or <span class="vote-no">NO</span>. If the vote passes, the mission begins!</p>
+                </div>
+
+                <!-- Step 3: The Trap & Sabotage -->
+                <div class="tutorial-step" data-step="3">
+                    <h3>The mission team must disarm a TRAP.</h3>
+                    <p>Players secretly contribute cards. Matching a trap's color adds <span class="vote-yes">+2</span>, but mismatching adds <span class="vote-no">-2</span>! Neutral cards are always <span class="friends-text">+1</span>.</p>
+                    <div class="tutorial-visual cards">
+                        <div class="tutorial-card card-yellow"><span>+2</span></div>
+                        <div class="tutorial-card card-pink"><span>+2</span></div>
+                        <div class="tutorial-card card-neutral"><span>+1</span></div>
+                    </div>
+                    <p>The <span class="conspiracy-text">Conspiracy</span> can sabotage by playing a mismatched color card to secretly lower the total!</p>
+                </div>
+
+                <!-- Step 4: The Clues & The Lie -->
+                <div class="tutorial-step" data-step="4">
+                    <h3>If successful, the BODYGUARD finds clues.</h3>
+                    <p>The Bodyguard for the mission gets to see secret information...</p>
+                    <div class="tutorial-visual clues">
+                        <div class="clue-box">
+                            Secretly Sees:<br>
+                            - Dagger<br>
+                            - Zodiac Room
+                        </div>
+                    </div>
+                    <p>A <span class="conspiracy-text">Conspiracy</span> member will often lie to confuse the <span class="friends-text">Friends</span>. Telling the truth is key for the Friends team!</p>
+                </div>
+
+            </div>
+
+            <div class="tutorial-nav">
+                <button id="tutorial-back" disabled>Back</button>
+                <div id="tutorial-progress">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button id="tutorial-next">Next</button>
+            </div>
+            <button id="tutorial-close">Close</button>
+        </div>
+    </div>
+
+
     <div class="container">
         <h1>Welcome to LittleLiar</h1>
         <p>Are you the host or are you playing?</p>
         <button onclick="window.location.href='/host.html'">HOST a Game</button>
         <button onclick="window.location.href='/player.html'">JOIN a Game</button>
+        <button id="how-to-play-btn">How to Play</button>
         
         <div class="how-to-play">
             <h3>What is LittleLiar?</h3>
-            <p>A social deduction game of secret teams. The <strong>Friends</strong> must disarm traps, while the <strong>Conspiracy</strong> tries to secretly sabotage their missions.</p>
+            <p>A social deduction game of secret teams. The <strong>Friends</strong> must find clues and disarm traps, while the <strong>Conspiracy</strong> tries to secretly sabotage their missions and execute a sinister plot.</p>
         </div>
     </div>
 
     <a href="https://venmo.com/sportgamer" id="donate-btn" target="_blank" rel="noopener noreferrer">Donate 🙏</a>
     <div class="watermark">Created by James Handler</div>
+
+    <script>
+        const howToPlayBtn = document.getElementById('how-to-play-btn');
+        const tutorialOverlay = document.getElementById('welcome-tutorial-overlay');
+        const closeBtn = document.getElementById('tutorial-close');
+        const nextBtn = document.getElementById('tutorial-next');
+        const backBtn = document.getElementById('tutorial-back');
+        const steps = document.querySelectorAll('.tutorial-step');
+        // --- THIS IS THE FIX ---
+        // Changed '.tutorial-progress .dot' to '#tutorial-progress .dot'
+        const dots = document.querySelectorAll('#tutorial-progress .dot');
+        let currentStep = 1;
+
+        function showStep(stepNumber) {
+            steps.forEach(step => step.classList.remove('active'));
+            const currentStepElement = document.querySelector(`.tutorial-step[data-step="${stepNumber}"]`);
+            if (currentStepElement) {
+                currentStepElement.classList.add('active');
+            }
+            
+            dots.forEach((dot, index) => {
+                const shouldBeActive = index === stepNumber - 1;
+                dot.classList.toggle('active', shouldBeActive);
+            });
+
+            backBtn.disabled = stepNumber === 1;
+            nextBtn.disabled = stepNumber === steps.length;
+        }
+
+        howToPlayBtn.addEventListener('click', () => {
+            tutorialOverlay.style.display = 'flex';
+            currentStep = 1;
+            showStep(currentStep);
+        });
+
+        closeBtn.addEventListener('click', () => {
+            tutorialOverlay.style.display = 'none';
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        backBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+        
+        tutorialOverlay.addEventListener('click', (event) => {
+            if (event.target === tutorialOverlay) {
+                tutorialOverlay.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

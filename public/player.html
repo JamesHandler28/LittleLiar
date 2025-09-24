@@ -7,31 +7,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- The animated background is intentionally removed from this page for clarity -->
+
     <div id="role-guide-overlay" class="overlay" style="display: none;">
         <div class="overlay-content role-guide-content">
             <h3>How to Play littleliar</h3>
             
             <h4>The Goal</h4>
-            <p><strong>Friends:</strong> Your goal is to keep the VIP alive by disarming all the traps.</p>
-            <p><strong>Conspiracy:</strong> Your goal is to help the Ringleader secretly sabotage missions and execute the secret plot to eliminate the VIP.</p>
+            <p><strong>Friends Team:</strong> Your goal is to keep the VIP alive by disarming all the traps OR by correctly guessing the secret plot in the Final Accusation.</p>
+            <p><strong>Conspiracy Team:</strong> Your goal is to secretly sabotage missions to damage the VIP, allowing your Ringleader to execute the secret plot and win instantly.</p>
             
             <hr>
 
-            <h4>Your Role</h4>
-            <p><strong>Friend:</strong> You are on the good team. Use your Supply Cards to help successfully disarm traps. Vote carefully and try to figure out who you can trust.</p>
-            <p><strong>Conspiracy Ringleader:</strong> You are the leader of the bad team. You know the secret plot (a specific weapon and location). Your goal is to get chosen as the Bodyguard for a mission to that location after the VIP has taken at least one damage.</p>
-            <p><strong>Conspiracy Accomplice:</strong> You are on the bad team with the Ringleader. Help them by sabotaging trap disarms with mismatched cards and by voting in ways that help them achieve their goal.</p>
+            <h4>The Roles</h4>
+            <p><strong>Friend:</strong> You are on the good team. Use your Supply Cards to help successfully disarm traps. Pay close attention to how people vote and what clues they declare to find who you can trust.</p>
+            <p><strong>Conspiracy Ringleader:</strong> You are the leader of the bad team. You know the secret plot (a specific weapon and location). Your goal is to get chosen as the Bodyguard for a mission to that *exact* location. If you succeed, you win!</p>
+            <p><strong>Conspiracy Accomplice:</strong> You are on the bad team with the Ringleader. You know who the Ringleader is and what the plot is. Help them by sabotaging trap disarms with mismatched cards and by voting in ways that help them achieve their goal.</p>
 
             <hr>
 
-            <h4>Game Flow</h4>
-            <ol style="text-align: left; margin: auto; max-width: 400px;">
-                <li><b>The Scout Proposes:</b> A Scout is chosen. They propose a team, a location to visit, and a Bodyguard for the mission.</li>
-                <li><b>The Vote:</b> Everyone votes YES or NO on the proposed team.</li>
-                <li><b>The Mission:</b> If the vote passes, the team goes to the location. All other players move to Gather Supplies.</li>
-                <li><b>The Trap:</b> The team members secretly contribute Supply Cards to disarm the trap at that location.</li>
-                <li><b>The Clue:</b> If successful, the Bodyguard secretly sees two clues and must publicly declare what they "found". They can lie or tell the truth!</li>
-                <li><b>New Round:</b> All players return to Start, and a new player becomes the Scout.</li>
+            <h4>Game Flow: A Round</h4>
+            <ol style="text-align: left; margin: auto; max-width: 450px;">
+                <li><b>The Scout Proposes:</b> One player is chosen as the Scout. They propose a team of players, a location to visit, and a Bodyguard for the mission (who must be on the team).</li>
+                <li><b>The Vote:</b> Everyone votes YES or NO on the proposal. Be careful! Three failed votes in a row will damage the VIP.</li>
+                <li><b>The Mission:</b> If the vote passes, the chosen team goes to the location. All other players move to Gather Supplies and draw new cards.</li>
+                <li><b>The Trap:</b> The team members at the location must disarm a trap. They secretly contribute Supply Cards. To succeed, the total value of the cards must meet or beat the trap's value.</li>
+                <li><b>The Clue:</b> If the trap is disarmed, the Bodyguard secretly sees two clues (one weapon, one location) and must then publicly declare what they "found". They can lie or tell the truth! This is how the Friends gather information.</li>
+                <li><b>New Round:</b> A new player becomes the Scout and the cycle repeats.</li>
             </ol>
 
             <button id="close-role-guide-btn">Close</button>
@@ -130,4 +132,3 @@
     <script src="player.js"></script>
 </body>
 </html>
-

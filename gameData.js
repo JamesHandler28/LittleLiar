@@ -24,7 +24,7 @@ const BOARD_LAYOUT = [
     { id: 5, name: "Start", type: "start", gridArea: "start" },
     { id: 6, name: "Infinity Pool", type: "room", gridArea: "r5" },
     { id: 7, name: "Observation Deck", type: "room", gridArea: "r6" },
-    { id: 8, name: "", type: "path", gridArea: "p2" },
+    // { id: 8, name: "", type: "path", gridArea: "p2" },
     { id: 9, name: "Hidden Cove", type: "room", gridArea: "r7" },
     { id: 10, name: "Storm Tracker", type: "storm_tracker", gridArea: "r8" },
     { id: 11, name: "Tennis Courts", type: "room", gridArea: "r9" },
